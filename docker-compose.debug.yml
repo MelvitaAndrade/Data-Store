@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: data-store
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+    ports:
+      - 3002:3002
+      - 9230:9230
+    command: npm run start:debug
+    environment:
+      - MONGODB_HOST_URL=db-mongo-data-store
+      - NEW_RELIC_ENABLED=false
+    networks:
+      - net
+    depends_on:
+      - mongo-replica-setup
+
+  db:
+    image: mongo
+    container_name: db-mongo-data-store
+    hostname: db-mongo-data-store
+    command: ['--replSet', 'rs0', '--bind_ip_all']
+    networks:
+      - net
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-replica-setup:
+    container_name: mongo-setup-data-store
+    image: mongo
+    volumes:
+      - ./mongo-setup.sh:/mongo-setup.sh
+    networks:
+      - net
+    entrypoint: ['bash', 'mongo-setup.sh']
+    depends_on:
+      - db
+
+networks:
+  net:
+volumes:
+  mongo-data:

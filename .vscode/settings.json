@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "Cimpress",
+    "commitlint",
+    "compodoc",
+    "jwks",
+    "nestjs",
+    "unmock"
+  ],
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "codemetrics.nodeconfiguration.ReturnStatement": 0,
+  "codemetrics.nodeconfiguration.SwitchStatement": 0,
+  "codemetrics.nodeconfiguration.ArrowFunction": 0,
+  "editor.tabSize": 2
+}
