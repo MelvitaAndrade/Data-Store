@@ -35,8 +35,8 @@ const getSwaggerObject = (
 
 /**
  * Sets up configuration for swagger
- * @param configService
- * @returns config
+ * @param configService Config service initialized with the configurations
+ * @returns swagger configuration
  */
 const getSwaggerConfig = (configService: ConfigService): unknown => {
   return {
@@ -56,7 +56,7 @@ const getSwaggerConfig = (configService: ConfigService): unknown => {
 
 /**
  * Sets up the swagger page for Layout Service
- * @param app
+ * @param app Nest application
  */
 export const setupSwagger = (app: INestApplication): void => {
   const configService = app.get(ConfigService);

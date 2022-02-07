@@ -11,6 +11,8 @@ import {
 import { BaseExceptionFilter, HttpAdapterHost } from '@nestjs/core';
 import { InterfaceConstants } from '../../constants/interface.constants';
 import { ApiErrorResponse } from '../../dto/api-error-response.dto';
+import * as httpContext from 'express-http-context';
+import { username } from '../../constants/context';
 
 /**
  * ExceptionFilter that catches all exceptions occurring within application
@@ -43,6 +45,9 @@ export class GenericExceptionFilter
     } else {
       this.handleUnhandledException(exception);
     }
+    newrelic.noticeError(exception, {
+      user: httpContext.get(username),
+    });
     super.catch(exception, host);
   }
 
