@@ -134,3 +134,32 @@ semantic_release:
   except:
     changes:
       - CHANGELOG.md
+
+development_deployment:
+  stage: deploy
+  variables:
+    ENVIRONMENT: 'development'
+  trigger:
+    project: Cimpress-Technology/MIS/gang-studio/infra/base-infrastructure
+  only:
+    - tags
+
+production_deployment:
+  stage: deploy
+  variables:
+    ENVIRONMENT: 'production'
+  trigger:
+    project: Cimpress-Technology/MIS/gang-studio/infra/base-infrastructure
+  only:
+    - tags
+  when: manual
+
+staging_deployment:
+  stage: deploy
+  variables:
+    ENVIRONMENT: 'stage'
+  trigger:
+    project: Cimpress-Technology/MIS/gang-studio/infra/base-infrastructure
+  only:
+    - tags
+  when: manual
