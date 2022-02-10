@@ -13,13 +13,13 @@ export const ConfigValidationSchema = Joi.object({
 
   HOST_URL: Joi.string().uri().required(),
 
-  ALLOWED_ORIGIN: Joi.string().default(/.+\.gs\.cimpress\.io$/gm),
+  ALLOWED_ORIGIN: Joi.string().default('*'),
 
   // Auth config
   AUTH0_APP_NAME: Joi.string().default('Data Store'),
   AUTH0_CLIENT_ID: Joi.string().required().length(32),
-  AUTH0_DOMAIN: Joi.string().uri().default('https://cimpress.auth0.com'),
-  AUTH0_AUDIENCE: Joi.string().uri().default('https://api.cimpress.io/'),
+  AUTH0_DOMAIN: Joi.string().uri(),
+  AUTH0_AUDIENCE: Joi.string().uri(),
   AUTH0_REDIRECT_URL: Joi.string()
     .uri()
     .default((schema) => `${schema.HOST_URL}/oauth2-redirect.html`),

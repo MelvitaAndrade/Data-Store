@@ -3,9 +3,6 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ConfigService } from '@nestjs/config';
-import newrelic from 'newrelic';
-import * as httpContext from 'express-http-context';
-import { username } from '../constants/context';
 
 /**
  * Class for validating auth token
@@ -38,11 +35,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @returns payload
    */
   validate(payload: unknown): unknown {
-    const userInfo =
-      payload['https://claims.cimpress.io/email'] ||
-      payload['https://claims.cimpress.io/canonical_id'];
-    newrelic.addCustomAttribute('user', userInfo);
-    httpContext.set(username, userInfo);
     return payload;
   }
 }
