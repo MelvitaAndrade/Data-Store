@@ -16,7 +16,7 @@ export const ConfigValidationSchema = Joi.object({
   ALLOWED_ORIGIN: Joi.string().default(/.+\.gs\.cimpress\.io$/gm),
 
   // Auth config
-  AUTH0_APP_NAME: Joi.string().required().min(3).max(30),
+  AUTH0_APP_NAME: Joi.string().default('Data Store'),
   AUTH0_CLIENT_ID: Joi.string().required().length(32),
   AUTH0_DOMAIN: Joi.string().uri().default('https://cimpress.auth0.com'),
   AUTH0_AUDIENCE: Joi.string().uri().default('https://api.cimpress.io/'),
@@ -30,6 +30,8 @@ export const ConfigValidationSchema = Joi.object({
     .uri()
     .default((schema) => `${schema.AUTH0_DOMAIN}oauth/token`),
 
+  DATABASE_NAME: Joi.string().default('data-store'),
+
   // Mongo connection config
   MONGO_CONNECTION_METHOD: Joi.string()
     .valid(
@@ -40,7 +42,7 @@ export const ConfigValidationSchema = Joi.object({
     .required(),
   MONGODB_HOST_URL: Joi.string().required(),
   MONGODB_URI: Joi.string().default(
-    (schema) => `${schema.MONGODB_HOST_URL}/${schema.LAYOUT_DATABASE_NAME}`,
+    (schema) => `${schema.MONGODB_HOST_URL}/${schema.DATABASE_NAME}`,
   ),
   MONGO_USERNAME: Joi.string().when('MONGO_CONNECTION_METHOD', {
     is: DatabaseConnectionMode.SCRAM,
