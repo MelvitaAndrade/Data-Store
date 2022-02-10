@@ -130,7 +130,7 @@ semantic_release:
     - npm install semantic-release @semantic-release/git @semantic-release/gitlab @semantic-release/npm  @semantic-release/changelog -g
     - npx semantic-release
   only:
-    - master
+    - main
   except:
     changes:
       - CHANGELOG.md
@@ -144,16 +144,6 @@ development_deployment:
   only:
     - tags
 
-production_deployment:
-  stage: deploy
-  variables:
-    ENVIRONMENT: 'production'
-  trigger:
-    project: Cimpress-Technology/MIS/gang-studio/infra/base-infrastructure
-  only:
-    - tags
-  when: manual
-
 staging_deployment:
   stage: deploy
   variables:
@@ -163,3 +153,17 @@ staging_deployment:
   only:
     - tags
   when: manual
+  needs:
+    - development_deployment
+
+production_deployment:
+  stage: deploy
+  variables:
+    ENVIRONMENT: 'production'
+  trigger:
+    project: Cimpress-Technology/MIS/gang-studio/infra/base-infrastructure
+  only:
+    - tags
+  when: manual
+  needs:
+    - staging_deployment
