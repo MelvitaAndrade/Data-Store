@@ -14,7 +14,7 @@ FROM node:lts-alpine
 ARG SERVER_PORT=3002
 WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 COPY --from=development /app/dist ./dist
 COPY --from=development /app/config ./config
 EXPOSE $SERVER_PORT
