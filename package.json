@@ -1,6 +1,6 @@
 {
   "name": "data-store",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "displayName": "Data Store",
   "description": "Service providing data related to the layout based applications and services",
   "private": true,
