@@ -1,3 +1,5 @@
+## [1.0.2](https://gitlab.com/Cimpress-Technology/MIS/gang-studio/layouts/apis/data-store/compare/v1.0.1...v1.0.2) (2022-02-10)
+
 ## [1.0.1](https://gitlab.com/Cimpress-Technology/MIS/gang-studio/layouts/apis/data-store/compare/v1.0.0...v1.0.1) (2022-02-10)
 
 # 1.0.0 (2022-02-10)
